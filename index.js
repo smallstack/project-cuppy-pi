@@ -1,27 +1,32 @@
 
 var onoff = require("onoff");
 var mc = require('node-mac-address');
+var https = require('https');
 
 // setup
 var Gpio = onoff.Gpio;
-var button1 = new Gpio(18, 'in', 'both');
+var button0 = new Gpio(18, 'in', 'both');
+// var button1 = new Gpio(18, 'in', 'both');
 var led1 = new Gpio(14, 'out');
 
 // mac address stuff
+var mac = undefined;
 mc.getMAC(function (err, MAC) {
     console.log(MAC);
+	mac = MAC;
 });
 
 // stuff
 
 
-button1.watch(function (err, value) {
+button0.watch(function (err, value) {
 	led1.writeSync(value);
-	console.log("button1: " + value);
-	    if (err) {
-	        throw err;
-
-    }
+	https.request({
+		protocol: "https:",
+		path: "/api/" + mac + "/0/up",
+		hostname: "cuppy.io",
+		method: "POST"
+	});
 });
 
 
