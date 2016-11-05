@@ -4,9 +4,8 @@ var mc = require('node-mac-address');
 
 // setup
 var Gpio = onoff.Gpio;
-var button = new Gpio(7, 'in', 'both');
-var led1 = new Gpio(13, 'out');
-var led2 = new Gpio(15, 'out');
+var button1 = new Gpio(18, 'in', 'both');
+var led1 = new Gpio(14, 'out');
 
 // mac address stuff
 mc.getMAC(function (err, MAC) {
@@ -14,9 +13,19 @@ mc.getMAC(function (err, MAC) {
 });
 
 // stuff
-button.watch(function (err, value) {
-    if (err) {
-        throw err;
+
+
+button1.watch(function (err, value) {
+	led1.writeSync(value);
+	console.log("button1: " + value);
+	    if (err) {
+	        throw err;
+
     }
-    led.writeSync(value);
+});
+
+
+process.on('SIGINT', function() {
+	led1.unexport();
+	button1.unexport();
 });
