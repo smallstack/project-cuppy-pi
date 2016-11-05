@@ -9,6 +9,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "pi-gpio": "0.0.8"
+    "node-mac-address": "^1.0.0",
+    "onoff": "0.0.8"
   }
 }

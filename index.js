@@ -1,16 +1,22 @@
 
-var gpio = require("pi-gpio");
+var onoff = require("onoff");
+var mc = require('node-mac-address');
 
-module.export = function () {
+// setup
+var Gpio = onoff.Gpio;
+var button = new Gpio(7, 'in', 'both');
+var led1 = new Gpio(13, 'out');
+var led2 = new Gpio(15, 'out');
 
+// mac address stuff
+mc.getMAC(function (err, MAC) {
+    console.log(MAC);
+});
 
-    gpio.open(7, "input", function (err) {
-        while (true)
-            gpio.read(7, 1, function (err, val) {
-                if (err)
-                    console.error("val was", val);
-                else
-                    console.log("val was", val);
-            });
-    });
-}
+// stuff
+button.watch(function (err, value) {
+    if (err) {
+        throw err;
+    }
+    led.writeSync(value);
+});
