@@ -4,12 +4,12 @@
   "description": "rasperry pi hardware to rest project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js && exit 1"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "node-mac-address": "^1.0.0",
-    "onoff": "^1.1.1"
+    "node-mac-address": "1.0.0",
+    "onoff": "1.1.1"
   }
 }
