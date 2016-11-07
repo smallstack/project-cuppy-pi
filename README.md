@@ -1,4 +1,4 @@
-# Rasbperry Pi Cuppy Project
+# Raspberry Pi Cuppy Project
 A Raspberry Pi integration for the cuppy live tournament mode. The API is simple: 
 
 https://cuppy.io/api/devices/DEVICE_ID/COMMAND
