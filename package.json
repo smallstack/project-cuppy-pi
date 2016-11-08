@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "node-mac-address": "1.0.0",
-    "onoff": "1.1.1"
+    "onoff": "1.1.1",
+    "request": "^2.78.0"
   }
 }

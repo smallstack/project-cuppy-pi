@@ -1,6 +1,6 @@
 var onoff = require("onoff");
 var mc = require('node-mac-address');
-var https = require('https');
+var request = require('request');
 
 var lastRequest = undefined;
 
@@ -21,19 +21,15 @@ function sendRequest(command) {
 	if (isSleeping())
 		return false;
 	sleep();
-    console.log("POST https://cuppy.io/api/devices/" + deviceId + "/" + command);
+	var url = "https://cuppy.io/api/devices/" + deviceId + "/" + command;    
+	console.log("POST " + url);
     try {
-	    var req = https.request({
-	        protocol: "https:",
-	        path: "/api/" + deviceId + "/" + command,
-	        hostname: "cuppy.io",
-	        method: "POST"
-	    }, function(res) {
-		console.log("response: ", res);
-	});
-		req.on('error', function (error) {
-		//console.error(error);
-	});
+	   request.post(url, function(error, incomingMessage, responseBody) {
+		if (error)
+			console.error(error);
+		else 
+			console.log(responseBody);
+		});
 	}
 	catch (e) {
 		console.error(e);
